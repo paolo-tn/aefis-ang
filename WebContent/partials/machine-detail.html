@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>Machine detail</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="inputFirstName">Name:</label>
+
+            <div class="controls">
+                <input type="text" id="inputFirstName" ng-model="machine.mach_identnr"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputLastName">Brand:</label>
+
+            <div class="controls">
+                <input type="text" id="inputLastName" ng-model="mach_brand"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="cancel()" class="btn btn-small">cancel</a>
+                <a ng-click="updateUser()" class="btn btn-small btn-primary">update machine</a>
+            </div>
+        </div>
+    </form>
+</div>

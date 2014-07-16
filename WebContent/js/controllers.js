@@ -50,18 +50,37 @@ app.controller('UserListCtrl', ['$scope', 'UsersFactory', 'UserFactory', '$locat
         	//console.log('all users -');
         	//console.log($scope.users);
         });
-        
+      
        
     }]);
 
 /*
  * controller per la visualizzazione della lista di macchine di un'azienda
  * */
-app.controller('MachinesListCtrl',['$scope', 'MachinesFactory', 
-  function($scope, MachinesFactory){
+app.controller('MachinesListCtrl',['$scope', 'MachinesFactory',  '$location',
+  function($scope, MachinesFactory,  $location){
 	 $scope.machines = MachinesFactory.query(function(){
-			console.log($scope.machines);
+		 //callback per la visualizzazione immediata
      });
+	  // callback per ng-click 'editMachine'
+	 //usa location per il redirect alla vista di dettaglio
+     $scope.editMachine = function (machineId) {
+         $location.path('/machine-detail/' + machineId);
+     };
+
+     // callback per ng-click 'deleteMachine':
+     // cancella la macchina e fa il redirect sulla lista
+     $scope.deleteMachine = function (machineId) {
+    	 //TODO
+    	 //MachinesFactory.delete({ id: machineId });
+         $scope.users = MachinesFactory.query(function(){});
+     };
+
+     // callback for ng-click 'createMachine':
+     $scope.createMachine = function () {
+         $location.path('/machine-creation');
+     };
+	 
 }]);
 
 app.controller('UserDetailCtrl', ['$scope', '$routeParams', 'UserFactory', '$location',

@@ -43,7 +43,7 @@ services.factory('UserFactory', function ($resource) {
 });
 
 services.factory('MachinesFactory', function($resource){
-	console.log("in machinesFactory");
+
 	return $resource('http://localhost/aefis/rest/data/machines2?schema=azienda_xx&lang=it',{},
 	  { query: { method: 'GET', params: {}, isArray: true}});
 });
