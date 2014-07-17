@@ -1,21 +1,80 @@
 <div class="container">
     <h1>Create a new machine</h1>
 
-    <form novalidate="novalidate" class="form-horizontal">
+    <form novalidate="novalidate" class="form-horizontal">   
         <div class="control-group">
-            <label class="control-label" for="inputFirstName">Machine name:</label>
+            <label class="control-label" for="inputName">Name:</label>
 
             <div class="controls">
-                <input type="text" id="inputFirstName" ng-model="user.firstName" placeholder="First name"/>
+                <input type="text" id="inputName" ng-model="machines[0].mach_nick_name"/>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="inputLastName">Machine brand:</label>
+            <label class="control-label" for="inputBrand">Brand:</label>
 
             <div class="controls">
-                <input type="text" id="inputLastName" ng-model="user.lastName" placeholder="Last name"/>
+                <input type="text" id="inputBrand" ng-model="machines[0].mach_brand"/>
             </div>
         </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="inputCategory">Category:</label>
+
+            <div class="controls">
+                <input type="text" id="inputCategory" ng-model="machines[0].machineCategory.desc" readonly/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputTypology">Typology:</label>
+
+            <div class="controls">
+                <input type="text" id="inputTypology" ng-model="machines[0].machineTypology.desc" readonly/>
+            </div>
+        </div>
+         <div class="control-group">
+            <label class="control-label" for="inputModel">Model:</label>
+
+            <div class="controls">
+                <input type="text" id="inputModel" ng-model="machines[0].mach_model"/>
+            </div>
+        </div>
+         <div class="control-group">
+            <label class="control-label" for="inputManufact">Manufact. Reg:</label>
+
+            <div class="controls">
+                <input type="text" id="inputManufact" ng-model="machines[0].mach_manufact_registr"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPlate">Plate:</label>
+
+            <div class="controls">
+                <input type="text" id="inputPlate" ng-model="machines[0].mach_plate"/>
+            </div>
+        </div>
+          <div class="control-group">
+            <label class="control-label" for="inputManufact">Manufact. Reg:</label>
+
+            <div class="controls">
+                <input type="text" id="inputManufact" ng-model="machines[0].mach_manufact_registr"/>
+            </div>
+        </div>
+            <div class="control-group">
+            <label class="control-label" for="inputVin">Vin</label>
+
+            <div class="controls">
+                <input type="text" id="inputVin" ng-model="machines[0].mach_vin"/>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="inputRemarks">Remarks:</label>
+
+            <div class="controls">
+                <input type="textarea" id="inputRemarks" ng-model="machines[0].mach_remarks"/>
+            </div>
+        </div>
+        
         <div class="control-group">
             <div class="controls">
                 <a ng-click="createNewUser()" class="btn btn-small btn-primary">create new machine</a>

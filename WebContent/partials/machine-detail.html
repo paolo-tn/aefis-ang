@@ -1,25 +1,95 @@
 <div class="container">
-    <h1>Machine detail</h1>
+    <h1>Machine details</h1>
 
     <form novalidate="novalidate" class="form-horizontal">
+
         <div class="control-group">
-            <label class="control-label" for="inputFirstName">Name:</label>
+            <label class="control-label" for="inputId">Id:</label>
 
             <div class="controls">
-                <input type="text" id="inputFirstName" ng-model="machine.mach_identnr"/>
+                <input type="text" id="inputId" ng-model="machines[0].mach_identnr" readonly/>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="inputName">Name:</label>
+
+            <div class="controls">
+                <input type="text" id="inputName" ng-model="machines[0].mach_nick_name"/>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="inputLastName">Brand:</label>
+            <label class="control-label" for="inputBrand">Brand:</label>
 
             <div class="controls">
-                <input type="text" id="inputLastName" ng-model="mach_brand"/>
+                <input type="text" id="inputBrand" ng-model="machines[0].mach_brand"/>
             </div>
         </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="inputCategory">Category:</label>
+
+            <div class="controls">
+                <input type="text" id="inputCategory" ng-model="machines[0].machineCategory.desc" readonly/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputTypology">Typology:</label>
+
+            <div class="controls">
+                <input type="text" id="inputTypology" ng-model="machines[0].machineTypology.desc" readonly/>
+            </div>
+        </div>
+         <div class="control-group">
+            <label class="control-label" for="inputModel">Model:</label>
+
+            <div class="controls">
+                <input type="text" id="inputModel" ng-model="machines[0].mach_model"/>
+            </div>
+        </div>
+         <div class="control-group">
+            <label class="control-label" for="inputManufact">Manufact. Reg:</label>
+
+            <div class="controls">
+                <input type="text" id="inputManufact" ng-model="machines[0].mach_manufact_registr"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPlate">Plate:</label>
+
+            <div class="controls">
+                <input type="text" id="inputPlate" ng-model="machines[0].mach_plate"/>
+            </div>
+        </div>
+          <div class="control-group">
+            <label class="control-label" for="inputManufact">Manufact. Reg:</label>
+
+            <div class="controls">
+                <input type="text" id="inputManufact" ng-model="machines[0].mach_manufact_registr"/>
+            </div>
+        </div>
+            <div class="control-group">
+            <label class="control-label" for="inputVin">Vin</label>
+
+            <div class="controls">
+                <input type="text" id="inputVin" ng-model="machines[0].mach_vin"/>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="inputRemarks">Remarks:</label>
+
+            <div class="controls">
+                <input type="textarea" id="inputRemarks" ng-model="machines[0].mach_remarks"/>
+            </div>
+        </div>
+        
+   
+      
         <div class="control-group">
             <div class="controls">
                 <a ng-click="cancel()" class="btn btn-small">cancel</a>
-                <a ng-click="updateUser()" class="btn btn-small btn-primary">update machine</a>
+                <a ng-click="updateMachine()" class="btn btn-small btn-primary">update machine</a>
             </div>
         </div>
     </form>
