@@ -31,10 +31,9 @@ app.controller('MachinesListCtrl',['$scope', 'MachinesFactory',  '$location',
 	 
 	  // callback per ng-click 'editMachine'
 	 //usa location per il redirect alla vista di dettaglio
-     $scope.editMachine = function (machineId) {
-    	 console.log('editing id:' + machineId);
+     $scope.editMachine = function () {    	
          $location.path('/machine-detail/');
-         $location.search({'id': machineId,'lang':$scope.lang,'schema': $scope.schema});
+         $location.search({'id': $scope.machines[0].mach_identnr,'lang':$scope.lang,'schema': $scope.schema});
      };
 
      // callback per ng-click 'deleteMachine':
@@ -60,9 +59,16 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
     function ($scope, $routeParams, MachineFactory, $location){
 		
 	    // callback for ng-click 'updateMachine':
-	    $scope.updateMachine = function () {
-	        MachineFactory.update($scope.machine);
+	    $scope.updateMachine = function (machineId, schema) {
+	    	var params = $location.search();
+	    	console.log("in app.ctrl.updateMachine");
+	    	console.log("about to update" + params.id);
+	    	console.log("schema" + params.schema);
+	    	console.log($scope.machines[0]);
+	        
+	    	MachineFactory.update({'id': params.id,'schema': params.schema}, $scope.machines[0] );
 	        $location.path('/machines-list');
+	        $location.search({'id': machineId,'schema': $scope.schema});
 	    };
 	
 	    // callback for ng-click 'cancel':
@@ -75,7 +81,7 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 	    
         $scope.machines = MachineFactory.query({id: params.id, schema:params.schema, lang:params.lang}, 
           function(){
-        	console.log($scope.machine);
+      
         });   
 }]);
 

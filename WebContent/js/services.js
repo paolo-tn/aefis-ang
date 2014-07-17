@@ -49,7 +49,7 @@ services.factory('MachinesFactory', function($resource){
 services.factory('MachineFactory', function($resource){
 	return $resource('http://localhost/aefis/rest/data/machines2', {},{
 		query: { method: 'GET', params:{id: '@id', schema: '@schema', lang:'@lang'}, isArray: true },
-		update:{method:'PUT', params:{id: '@id'}},
+		update:{method:'PUT', params:{id:'@id', schema:'@schema'}},
 		
 		delete:{method:'DELETE', params:{id:'@id', schema:'@schema'}}
 	});
