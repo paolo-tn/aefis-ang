@@ -38,13 +38,27 @@
 	            <div class="controls">
 	                <input type="text" id="inputCategory" ng-model="machines[0].machineCategory.desc" readonly/>
 	            </div>
+	         
 	        </div>
+	        <!--  
 	        <div class="control-group">
 	            <label class="control-label" for="inputTypology">Typology:</label>
 	
 	            <div class="controls">
 	                <input type="text" id="inputTypology" ng-model="machines[0].machineTypology.desc" readonly/>
 	            </div>
+	              
+	        </div>
+	        -->
+	        
+	        <div class="control-group">
+	        <label class="control-label" for="inputTypologySelect">Change Typology:</label>
+	         <div>
+	                 <select ng-options="typology.desc for typology in availTypologies" 
+			          ng-model="machines[0].machineTypology">
+			          <option value="">{{machines[0].machineTypology.desc}}></option>
+			        </select>
+	            	</div>
 	        </div>
 	         <div class="control-group">
 	            <label class="control-label" for="inputModel">Model:</label>
@@ -99,16 +113,16 @@
 			    <table class="table table-striped table-condensed">
 			      <tr>
 			            <th style="min-width: 80px;">power code</th>
-			             <th style="min-width: 80px;">power</th>
-			            <th style="min-width: 80px;">description</th>
+			             <th style="min-width: 80px;">description</th>
+			            <th style="min-width: 80px;">power</th>
 			            
 			            <th style="width:20px;">&nbsp;</th>
 			            <th style="width:20px;">&nbsp;</th>
 			        </tr>
 			        <tr ng-repeat="size in machines[0].machineSizeList">
-			            <td>{{size.masi_size_code}}</td>
-			            <td>{{size.masi_amount}}</td>
+			            <td>{{size.masi_size_code}}</td>			           
 			            <td>{{size.masi_desc}}</td>
+			             <td><input type="text" id="inputVin" ng-model="size.masi_amount"/></td>
 			            <td><a ng-click="deleteSizeItem(size.masi_size_code)" class="btn btn-small">remove</a>
 						</td>
 			        </tr>
