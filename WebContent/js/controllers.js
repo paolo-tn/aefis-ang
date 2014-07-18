@@ -78,6 +78,35 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 	        $location.search({'lang':$scope.lang,'schema': $scope.schema});
 	    };
 	    
+	    
+	    //callback per cancellazione item nella listaazionamenti
+	    $scope.deleteDriveItem = function(code){
+	    	console.log("in deleteDriveItem");
+	    	console.log(code);
+	    	var idx = null;
+	    	$scope.machines[0].machineDrivingList.forEach(function(item, index){
+	    		if(item.madr_driv_code === code){
+	    			console.log("found");
+	    			console.log(index);
+	    			idx = index;
+	    			
+	    		} 
+	    		$scope.machines[0].machineDrivingList.splice(idx,1);
+	    	});
+	    };
+	    
+	    $scope.deleteSizeItem= function(code){
+	    	var idx = null;
+	    	$scope.machines[0].machineSizeList.forEach(function(item, index){
+	    		if(item.masi_size_code === code){
+	    			console.log("found");
+	    			console.log(index);
+	    			idx = index;	    			
+	    		} 
+	    		$scope.machines[0].machineSizeList.splice(idx,1);
+	    	});
+	    };
+	    
 	    var params = $location.search();
 	    
         $scope.machines = MachineFactory.query({id: params.id, schema:params.schema, lang:params.lang}, 

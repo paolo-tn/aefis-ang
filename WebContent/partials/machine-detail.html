@@ -109,6 +109,8 @@
 			            <td>{{size.masi_size_code}}</td>
 			            <td>{{size.masi_amount}}</td>
 			            <td>{{size.masi_desc}}</td>
+			            <td><a ng-click="deleteSizeItem(size.masi_size_code)" class="btn btn-small">remove</a>
+						</td>
 			        </tr>
 			    </table> 
 		     </div>
@@ -127,13 +129,14 @@
 		        </tr>
 		        <tr ng-repeat="drive in machines[0].machineDrivingList">
 		            <td>{{drive.madr_driv_code}}</td>
+		             <td><a ng-click="deleteDriveItem(drive.madr_driv_code)" class="btn btn-small">remove</a></td>
 		        </tr>
 	        </table>
 		  </div>
 		</div>
 		
 
-   
+   		<br/>
       
         <div class="control-group">
             <div class="controls">
