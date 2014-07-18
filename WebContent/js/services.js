@@ -54,3 +54,32 @@ services.factory('MachineFactory', function($resource){
 		delete:{method:'DELETE', params:{id:'@id', schema:'@schema'}}
 	});
 });
+
+
+/**
+ * service factory per ottenere le tipologie disponibili per
+ * una determinata categoria
+ */
+services.factory('MachTypoFactory', function($resource){
+	return $resource('http://localhost/aefis/rest/data/machinestypo2',{},{
+		query:{method:'GET', params:{category:'@category'}, isArray: true }
+	});
+});
+
+/**
+ * service factory per ottenere i tipi di azionamento disponibili
+ */
+services.factory('MachDriveTypeFactory', function($resource){
+	return $resource('http://localhost/aefis/rest/data/machinesdriving2',{},{
+		query:{method:'GET', params:{lang:'@lang'}, isArray: true }
+	});
+});
+
+/**
+ *service factory per ottenere i tipi di potenza disponibili
+ */
+services.factory('MachSizeTypeFactory', function($resource){
+	return $resource('http://localhost/aefis/rest/data/machinessizes2',{},{
+		query:{method:'GET', params:{lang:'@lang'}, isArray: true }
+	});
+})

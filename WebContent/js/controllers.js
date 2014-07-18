@@ -55,8 +55,9 @@ app.controller('MachinesListCtrl',['$scope', 'MachinesFactory',  '$location',
 /*
  * controller per la vista di dettaglio 
  * */
-app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory', '$location', 
-    function ($scope, $routeParams, MachineFactory, $location){
+app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory', '$location','MachTypoFactory',
+                                     'MachDriveTypeFactory','MachSizeTypeFactory',
+    function ($scope, $routeParams, MachineFactory, $location, MachTypoFactory, MachDriveTypeFactory,MachSizeTypeFactory){
 		
 	    // callback for ng-click 'updateMachine':
 	    $scope.updateMachine = function (machineId, schema) {
@@ -76,13 +77,33 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 	        $location.path('/machines-list');
 	        $location.search({'lang':$scope.lang,'schema': $scope.schema});
 	    };
+	    
 	    var params = $location.search();
-
 	    
         $scope.machines = MachineFactory.query({id: params.id, schema:params.schema, lang:params.lang}, 
           function(){
-      
-        });   
+        	 console.log("scope.machines");
+        	 console.log($scope.machines[0]);
+        	 
+        	 //richiesta delle tipologie disponibili
+        	 $scope.availTypologies = MachTypoFactory.query({category: $scope.machines[0].machineCategory.id},
+                   		function(){
+        		 console.log("checking available typologies");
+        		 console.log($scope.availTypologies);
+        	 });
+        	 
+        	 //richiesta degli azionamenti disponibili
+        	 $scope.availDriveType = MachDriveTypeFactory.query({lang:params.lang}, function(){
+        		 console.log("checking available driving type");
+        		 console.log($scope.availDriveType);
+        	 });
+        	 
+        	 //richiesta dei tipi di potenza disponibili
+        	 $scope.availSizeType = MachSizeTypeFactory.query({lang:params.lang},function(){
+        		 console.log("checking available sizetypes");
+        		 console.log($scope.availSizeType);
+        	 }); 
+        });    
 }]);
 
 
