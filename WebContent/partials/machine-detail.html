@@ -122,7 +122,7 @@
 			         <td>    
 			         <div>
 	                    <select ng-options="sizeType.code for sizeType in availSizeType" 
-			               ng-model="machines[0].machineSizeList[$index]">
+			               ng-model="size.machineSizeType">
 			              <option value="">{{size.machineSizeType.code}}</option>
 			            </select>
 	            	  </div>
@@ -130,7 +130,7 @@
 	            	  <td>	
 	            	    <div>
 	                      <select ng-options="sizeType.descr for sizeType in availSizeType" 
-			                ng-model="machines[0].machineSizeList[$index]">
+			                ng-model="size.machineSizeType">
 			                <option value="">{{size.machineSizeType.descr}}</option>
 			              </select>
 	            	    </div>
@@ -138,7 +138,7 @@
 			          <td>	
 	            	    <div>
 	                      <select ng-options="sizeType.um for sizeType in availSizeType" 
-			                ng-model="machines[0].machineSizeList[$index]">
+			                ng-model="size.machineSizeType">
 			                <option value="">{{size.machineSizeType.um}}</option>
 			              </select>
 	            	    </div>
@@ -149,7 +149,7 @@
 			          </td>
 			          
 			          <td>
-			            <a ng-click="deleteSizeItem(size.machineSizeType.code)" class="btn btn-small">Remove</a>
+			            <a ng-click="deleteSizeItem($index)" class="btn btn-small">Remove</a>
 					  </td>
 			        </tr>
 			    </table> 

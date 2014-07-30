@@ -105,27 +105,34 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 	    };
 	    */
 	    
-	    $scope.deleteSizeItem= function(code){
+	    $scope.deleteSizeItem= function(index){
+	    	console.log("index to delete:" + index);
+	    	/*
 	    	var idx = null;
 	    	$scope.machines[0].machineSizeList.forEach(function(item, index){
-	    		if(item.masi_size_code === code){
+	    		if(item.masi_=== code){
 	    			console.log("found");
 	    			console.log(index);
 	    			idx = index;	
 	    			$scope.machines[0].machineSizeList.splice(idx,1);
 	    		} 
 	    		
-	    	});
+	    	}
+	    	*/	    	
+	    	$scope.machines[0].machineSizeList.splice(index,1);
+	    	
 	    	console.log('this is the array after spicing on pos');
 	    	console.log($scope.machines[0].machineSizeList);
 	    	console.log($scope.machines[0].machineSizeList.length);
 	    		
 	    };
 	    
+	    
+	    
 	    $scope.addSizeItem = function(){
 	        console.log("adding  a new size");
 		    console.log($scope.machines[0].machineSizeList);
-	    	$scope.machines[0].machineSizeList.push({'masi_size_code':'', 'masi_amount':0, 'masi_desc':''});
+	    	$scope.machines[0].machineSizeList.push({'machineSizeType':{'code':'', 'descr': '', 'um': ''}, 'amount': 0});
 	    	console.log("this is the array after adding a new size"); 
 	    	console.log($scope.machines[0].machineSizeList);
 	    };
