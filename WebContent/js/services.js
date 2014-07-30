@@ -82,4 +82,4 @@ services.factory('MachSizeTypeFactory', function($resource){
 	return $resource('http://localhost/aefis/rest/data/machinessizes2',{},{
 		query:{method:'GET', params:{lang:'@lang'}, isArray: true }
 	});
-})
+});

@@ -79,13 +79,17 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 	    };
 	    
 	    
-	    //callback per cancellazione item nella listaazionamenti
+	    //TOLTO LA POSSIBILITÁ DI RIMUOVERE/AGGIUNGERE GLI AZIONAMENTI
+	    // PERCHÉ ALMENO UN AZIONAMENTO DEVE ESISTERE QUINDI
+	    // L'UTENTE PUÓ SOLO CAMBIARE QUELLO ESISTENTE
+	    /*
 	    $scope.deleteDriveItem = function(code){
 	    	console.log("in deleteDriveItem");
 	    	console.log(code);
+	    	console.log($scope.machines[0].machineDrivingList);
 	    	var idx = null;
 	    	$scope.machines[0].machineDrivingList.forEach(function(item, index){
-	    		if(item.madr_driv_code === code){
+	    		if(item.code === code){
 	    			console.log("found");
 	    			console.log(index);
 	    			idx = index;
@@ -94,6 +98,12 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 	    		$scope.machines[0].machineDrivingList.splice(idx,1);
 	    	});
 	    };
+	     $scope.addDriveItem = function(){
+	       $scope.machines[0].machineDrivingList.push({'acronym':'', 'descr':'', 'code':''});
+	       console.log("added a new driving");
+	       console.log($scope.machines[0].machineDrivingList);
+	    };
+	    */
 	    
 	    $scope.deleteSizeItem= function(code){
 	    	var idx = null;
@@ -101,11 +111,25 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 	    		if(item.masi_size_code === code){
 	    			console.log("found");
 	    			console.log(index);
-	    			idx = index;	    			
+	    			idx = index;	
+	    			$scope.machines[0].machineSizeList.splice(idx,1);
 	    		} 
-	    		$scope.machines[0].machineSizeList.splice(idx,1);
+	    		
 	    	});
+	    	console.log('this is the array after spicing on pos');
+	    	console.log($scope.machines[0].machineSizeList);
+	    	console.log($scope.machines[0].machineSizeList.length);
+	    		
 	    };
+	    
+	    $scope.addSizeItem = function(){
+	        console.log("adding  a new size");
+		    console.log($scope.machines[0].machineSizeList);
+	    	$scope.machines[0].machineSizeList.push({'masi_size_code':'', 'masi_amount':0, 'masi_desc':''});
+	    	console.log("this is the array after adding a new size"); 
+	    	console.log($scope.machines[0].machineSizeList);
+	    };
+	    
 	    
 	    var params = $location.search();
 	    
