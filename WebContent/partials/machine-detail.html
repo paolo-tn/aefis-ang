@@ -122,25 +122,39 @@
 			         <td>    
 			         <div>
 	                    <select ng-options="sizeType.code for sizeType in availSizeType" 
-			               ng-model="size.masi_size_code">
-			              <option value="">{{size.masi_size_code}}</option>
+			               ng-model="machines[0].machineSizeList[$index]">
+			              <option value="">{{size.machineSizeType.code}}</option>
 			            </select>
 	            	  </div>
 	            	  </td>
 	            	  <td>	
 	            	    <div>
 	                      <select ng-options="sizeType.descr for sizeType in availSizeType" 
-			                ng-model="size.masi_desc">
-			                <option value="">{{size.masi_desc}}</option>
+			                ng-model="machines[0].machineSizeList[$index]">
+			                <option value="">{{size.machineSizeType.descr}}</option>
 			              </select>
 	            	    </div>
 			          </td> 
-			            <!-- <td>{{size.masi_desc}}</td> -->
-			          <td><input type="text" id="inputVin" ng-model="size.masi_amount"/></td>
-			          <td><a ng-click="deleteSizeItem(size.masi_size_code)" class="btn btn-small">Remove</a>
-						</td>
+			          <td>	
+	            	    <div>
+	                      <select ng-options="sizeType.um for sizeType in availSizeType" 
+			                ng-model="machines[0].machineSizeList[$index]">
+			                <option value="">{{size.machineSizeType.um}}</option>
+			              </select>
+	            	    </div>
+			          </td> 
+			           
+			          <td>
+			            <input type="text" id="size_amount" ng-model="size.amount"/>
+			          </td>
+			          
+			          <td>
+			            <a ng-click="deleteSizeItem(size.machineSizeType.code)" class="btn btn-small">Remove</a>
+					  </td>
 			        </tr>
 			    </table> 
+			    
+			    
 			    <div class="control-group">
                    <div class="controls">
                        <a ng-click="addSizeItem()" class="btn btn-small">AddItem</a>
