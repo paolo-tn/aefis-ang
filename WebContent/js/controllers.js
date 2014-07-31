@@ -31,9 +31,9 @@ app.controller('MachinesListCtrl',['$scope', 'MachinesFactory',  '$location',
 	 
 	  // callback per ng-click 'editMachine'
 	 //usa location per il redirect alla vista di dettaglio
-     $scope.editMachine = function () {    	
+     $scope.editMachine = function (machId) {    	
          $location.path('/machine-detail/');
-         $location.search({'id': $scope.machines[0].mach_identnr,'lang':$scope.lang,'schema': $scope.schema});
+         $location.search({'id': machId,'lang':$scope.lang,'schema': $scope.schema});
      };
 
      // callback per ng-click 'deleteMachine':
