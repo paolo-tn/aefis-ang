@@ -135,8 +135,9 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 
 app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location','MachTypoFactory',
                                          'MachDriveTypeFactory','MachSizeTypeFactory',"MachineCategoriesFactory",
+                                         "MachineFactory",
                                          function($scope, $routeParams, $location, MachTypoFactory, MachDriveTypeFactory,
-                                        		MachSizeTypeFactory, MachineCategoriesFactory){
+                                        		MachSizeTypeFactory, MachineCategoriesFactory, MachineFactory){
 			 // la lingua va impostata in maniera dinamica 
 			 //FIXME
 			 var curr_lang ='it';	
@@ -208,6 +209,20 @@ app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location','
 			    	$scope.new_machine.machineSizeList.push({'machineSizeType':{'code':'', 'descr': '', 'um': ''}, 'amount': 0});
 		
 			    };
+			    
+			    // callback for ng-click 'cancel':
+			    $scope.cancel = function () {
+			        $location.path('/machines-list');
+			        //$location.search({'lang':$scope.lang,'schema': $scope.schema});
+			    };
+			    
+			    $scope.createMachine = function(){
+			    	console.log("about to post a new machine")
+			    	MachineFactory.save({'schema': "azienda_xx"}, $scope.new_machine );
+			        $location.path('/machines-list');
+			    };
+			    
+			    
 	
 	
 }]);
