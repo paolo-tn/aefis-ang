@@ -1,84 +1,202 @@
 <div class="container">
-    <h1>Create a new machine</h1>
+  
 
-    <form novalidate="novalidate" class="form-horizontal">   
-        <div class="control-group">
-            <label class="control-label" for="inputName">Name:</label>
+    <form novalidate="novalidate" class="form-horizontal">
+	<panel class="panel panel-default">
+	    <!-- Heading del pannello -->
+	     <div class="panel-heading">
+		      <h3 class="panel-title">Create machine</h3>
+		 </div>    
+	    <!-- Body del pannell -->	    
+	     <div class="panel-body">
+	     
+		        <div class="control-group">  
+		            <label class="control-label" for="inputId">Id:</label>
+	
+		            <div class="controls">  
+		                <input type="text" id="inputId" ng-model="new_machine.mach_identnr" readonly/>
+		           </div>  
+				 </div> 
+		        
+	        <div class="control-group">
+	            <label class="control-label" for="inputName">Name:</label>
+	
+	            <div class="controls">
+	                <input type="text" id="inputName" ng-model="new_machine.mach_nick_name"/>
+	            </div>
+	        </div>
+	      
+	        <div class="control-group">
+	            <label class="control-label" for="inputBrand">Brand:</label>
+	
+	            <div class="controls">
+	                <input type="text" id="inputBrand" ng-model="new_machine.mach_brand"/>
+	            </div>
+	        </div>
+	       
+	        <div class="control-group">
+	            <label class="control-label" for="inputCategory">Category:</label>
+	
+	             <div class="controls">
+	                 <select ng-options="categ.desc for categ in availCategories" 
+			          ng-model="selectedCategory" >
+			          <option value="">{{selectedCategory.desc}}</option>
+			        </select>
+	            	</div>
+	             </div>
+	         
+	        </div>
+	     
+	        <div class="control-group">
+	            <label class="control-label" for="inputTypologySelect">Change Typology:</label>
+	               <div class="controls">
+	                 <select ng-options="typology.desc for typology in availTypologies" 
+			          ng-model="new_machine.machineTypology">
+			          <option value=""></option>
+			        </select>
+	            	</div>
+	        </div>
+	      
+	         <div class="control-group">
+	            <label class="control-label" for="inputModel">Model:</label>
+	
+	            <div class="controls">
+	                <input type="text" id="inputModel" ng-model="new_machine.mach_model"/>
+	            </div>
+	        </div>
+	       
+	         <div class="control-group">
+	            <label class="control-label" for="inputManufact">Manufact. Reg:</label>
+	
+	            <div class="controls">
+	                <input type="text" id="inputManufact" ng-model="new_machine.mach_manufact_registr"/>
+	            </div>
+	        </div>
+	        
+	        <div class="control-group">
+	            <label class="control-label" for="inputPlate">Plate:</label>
+	
+	            <div class="controls">
+	                <input type="text" id="inputPlate" ng-model="new_machine.mach_plate"/>
+	            </div>
+	        </div>
+	      
+	          <div class="control-group">
+	            <label class="control-label" for="inputManufact">Manufact. Reg:</label>
+	
+	            <div class="controls">
+	                <input type="text" id="inputManufact" ng-model="new_machine.mach_manufact_registr"/>
+	            </div>
+	        </div>
+	       
+	            <div class="control-group">
+	            <label class="control-label" for="inputVin">Vin</label>
+	
+	            <div class="controls">
+	                <input type="text" id="inputVin" ng-model="new_machine.mach_vin"/>
+	            </div>
+	          </div>
+	       
+	        <div class="control-group">
+	            <label class="control-label" for="inputRemarks">Remarks:</label>
+	
+	            <div class="controls">
+	                <input type="textarea" id="inputMachSizeTypeFactoryRemarks" ng-model="new_machine.mach_remarks"/>
+	            </div>
+	        </div>
+	       
+	        </div>
+	      
+        </panel>
+        <div class="panel panel-default">
+		    <div class="panel-heading">
+		      <h3 class="panel-title">Power list</h3>
+		    </div>
+		    <div class="panel-body">
+			    <table class="table table-striped table-condensed">
+			      <tr>
+			            <th style="min-width: 80px;">power code</th>
+			             <th style="min-width: 80px;">description</th>
+			            <th style="min-width: 80px;">power</th>
+			            
+			            <th style="width:20px;">&nbsp;</th>
+			            <th style="width:20px;">&nbsp;</th>
+			        </tr>
+			        <tr ng-repeat="size in new_machine.machineSizeList">
+			         <td>    
+			         <div>
+	                    <select ng-options="sizeType.code for sizeType in availSizeType" 
+			               ng-model="size.machineSizeType">
+			              <option value="">{{size.machineSizeType.code}}</option>
+			            </select>
+	            	  </div>
+	            	  </td>
+	            	  <td>	
+	            	    <div>
+	                      <select ng-options="sizeType.descr for sizeType in availSizeType" 
+			                ng-model="size.machineSizeType">
+			                <option value="">{{size.machineSizeType.descr}}</option>
+			              </select>
+	            	    </div>
+			          </td> 
+			          <td>	
+	            	    <div>
+	                      <select ng-options="sizeType.um for sizeType in availSizeType" 
+			                ng-model="size.machineSizeType">
+			                <option value="">{{size.machineSizeType.um}}</option>
+			              </select>
+	            	    </div>
+			          </td> 
+			           
+			          <td>
+			            <input type="text" id="size_amount" ng-model="size.amount"/>
+			          </td>
+			          
+			          <td>
+			            <a ng-click="deleteSizeItem($index)" class="btn btn-small">Remove</a>
+					  </td>
+			        </tr>
+			    </table> 
+			    
+			    
+			    <div class="control-group">
+                   <div class="controls">
+                       <a ng-click="addSizeItem()" class="btn btn-small">AddItem</a>
+                   </div>
+               </div>
+		     </div>
+		</div>
+		
+		<!-- pannello azionamenti -->
+		<div class="panel panel-default">
+           <div class="panel-heading">
+		    <h3 class="panel-title">Driving list</h3>
+		   </div>
+		  <div class="panel-body">
+		    <table class="table table-striped table-condensed">        
+		        <tr>
+		            <th style="min-width: 80px;">code </th>
+		            <th style="width:20px;">&nbsp;</th>	
+		        </tr>
+		        <tr ng-repeat="drive in new_machine.machineDrivingList">
+		            <td>
 
-            <div class="controls">
-                <input type="text" id="inputName" ng-model="machines[0].mach_nick_name"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="inputBrand">Brand:</label>
+			            <div>
+				            <select ng-options="someDrive.descr for someDrive in availDriveType "
+				                    ng-model = "new_machine.machineDrivingList[0]">
+				            <option value="">{{new_machine.machineDrivingList[0].code}}</option>
+				            </select>
+			            </div>
+		            </td>
+		             <!-- <td><a ng-click="deleteDriveItem(drive.code)" class="btn btn-small">remove</a></td> -->
+		        </tr>
+	        </table>
+	        
+		</div>
+		
 
-            <div class="controls">
-                <input type="text" id="inputBrand" ng-model="machines[0].mach_brand"/>
-            </div>
-        </div>
+   		<br/>
+      
         
-        <div class="control-group">
-            <label class="control-label" for="inputCategory">Category:</label>
-
-            <div class="controls">
-                <input type="text" id="inputCategory" ng-model="machines[0].machineCategory.desc" readonly/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="inputTypology">Typology:</label>
-
-            <div class="controls">
-                <input type="text" id="inputTypology" ng-model="machines[0].machineTypology.desc" readonly/>
-            </div>
-        </div>
-         <div class="control-group">
-            <label class="control-label" for="inputModel">Model:</label>
-
-            <div class="controls">
-                <input type="text" id="inputModel" ng-model="machines[0].mach_model"/>
-            </div>
-        </div>
-         <div class="control-group">
-            <label class="control-label" for="inputManufact">Manufact. Reg:</label>
-
-            <div class="controls">
-                <input type="text" id="inputManufact" ng-model="machines[0].mach_manufact_registr"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="inputPlate">Plate:</label>
-
-            <div class="controls">
-                <input type="text" id="inputPlate" ng-model="machines[0].mach_plate"/>
-            </div>
-        </div>
-          <div class="control-group">
-            <label class="control-label" for="inputManufact">Manufact. Reg:</label>
-
-            <div class="controls">
-                <input type="text" id="inputManufact" ng-model="machines[0].mach_manufact_registr"/>
-            </div>
-        </div>
-            <div class="control-group">
-            <label class="control-label" for="inputVin">Vin</label>
-
-            <div class="controls">
-                <input type="text" id="inputVin" ng-model="machines[0].mach_vin"/>
-            </div>
-        </div>
-        
-        <div class="control-group">
-            <label class="control-label" for="inputRemarks">Remarks:</label>
-
-            <div class="controls">
-                <input type="textarea" id="inputRemarks" ng-model="machines[0].mach_remarks"/>
-            </div>
-        </div>
-        
-        <div class="control-group">
-            <div class="controls">
-                <a ng-click="createNewUser()" class="btn btn-small btn-primary">create new machine</a>
-            </div>
-        </div>
     </form>
 </div>

@@ -79,46 +79,10 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 	    };
 	    
 	    
-	    //TOLTO LA POSSIBILITÁ DI RIMUOVERE/AGGIUNGERE GLI AZIONAMENTI
-	    // PERCHÉ ALMENO UN AZIONAMENTO DEVE ESISTERE QUINDI
-	    // L'UTENTE PUÓ SOLO CAMBIARE QUELLO ESISTENTE
-	    /*
-	    $scope.deleteDriveItem = function(code){
-	    	console.log("in deleteDriveItem");
-	    	console.log(code);
-	    	console.log($scope.machines[0].machineDrivingList);
-	    	var idx = null;
-	    	$scope.machines[0].machineDrivingList.forEach(function(item, index){
-	    		if(item.code === code){
-	    			console.log("found");
-	    			console.log(index);
-	    			idx = index;
-	    			
-	    		} 
-	    		$scope.machines[0].machineDrivingList.splice(idx,1);
-	    	});
-	    };
-	     $scope.addDriveItem = function(){
-	       $scope.machines[0].machineDrivingList.push({'acronym':'', 'descr':'', 'code':''});
-	       console.log("added a new driving");
-	       console.log($scope.machines[0].machineDrivingList);
-	    };
-	    */
 	    
 	    $scope.deleteSizeItem= function(index){
 	    	console.log("index to delete:" + index);
-	    	/*
-	    	var idx = null;
-	    	$scope.machines[0].machineSizeList.forEach(function(item, index){
-	    		if(item.masi_=== code){
-	    			console.log("found");
-	    			console.log(index);
-	    			idx = index;	
-	    			$scope.machines[0].machineSizeList.splice(idx,1);
-	    		} 
-	    		
-	    	}
-	    	*/	    	
+	    
 	    	$scope.machines[0].machineSizeList.splice(index,1);
 	    	
 	    	console.log('this is the array after spicing on pos');
@@ -156,6 +120,7 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
         	 $scope.availDriveType = MachDriveTypeFactory.query({lang:params.lang}, function(){
         		 console.log("checking available driving type");
         		 console.log($scope.availDriveType);
+        		 console.log(params.lang);
         	 });
         	 
         	 //richiesta dei tipi di potenza disponibili
@@ -167,63 +132,47 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 }]);
 
 
-/*
-app.controller('UserDetailCtrl', ['$scope', '$routeParams', 'UserFactory', '$location',
-    function ($scope, $routeParams, UserFactory, $location) {
 
-        // callback for ng-click 'updateUser':
-        $scope.updateUser = function () {
-            UserFactory.update($scope.user);
-            $location.path('/user-list');
-        };
-
-        // callback for ng-click 'cancel':
-        $scope.cancel = function () {
-            $location.path('/user-list');
-         
-        };
-
-        $scope.user = UserFactory.show({id: $routeParams.id});
-    }]);
-    
-    
-  app.controller('DummyCtrl', ['$scope', 'DummyFactory', function ($scope, DummyFactory) {
-    $scope.bla = 'bla from controller';
-    DummyFactory.get({}, function (dummyFactory) {
-        $scope.firstname = dummyFactory.firstName;
-    });
-}]);  
-    
- app.controller('UserListCtrl', ['$scope', 'UsersFactory', 'UserFactory', '$location',
-    function ($scope, UsersFactory, UserFactory, $location) {
-
-        // callback for ng-click 'editUser':
-        $scope.editUser = function (userId) {
-            $location.path('/user-detail/' + userId);
-        };
-
-        // callback for ng-click 'deleteUser':
-        $scope.deleteUser = function (userId) {
-            UserFactory.delete({ id: userId });
-            $scope.users = UsersFactory.query();
-        };
-
-        // callback for ng-click 'createUser':
-        $scope.createNewUser = function () {
-            $location.path('/user-creation');
-        };
-
-        $scope.users = UsersFactory.query(function(){
-
-        });
-    }]);
-
-app.controller('UserCreationCtrl', ['$scope', 'UsersFactory', '$location',
-    function ($scope, UsersFactory, $location) {
-        // callback for ng-click 'createNewUser':
-        $scope.createNewUser = function () {
-            UsersFactory.create($scope.user);
-            $location.path('/user-list');
-        };
-    }]);
-*/
+app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location',
+                                         'MachDriveTypeFactory','MachSizeTypeFactory',"MachineCategoriesFactory",
+                                         function($scope, $routeParams, $location,  MachDriveTypeFactory,
+                                        		MachSizeTypeFactory, MachineCategoriesFactory){
+			 // la lingua va impostata in maniera dinamica 
+			 //FIXME
+			 var curr_lang ='it';	
+		
+			 $scope.new_machine = {
+			     mach_nick_name :"",
+			     mach_brand : "",
+			     mach_model : "",
+			     machineCategory : "",
+			     machineTypology : "",
+			     mach_plate : "",
+			     mach_manufact_registr :"",
+			     mach_vin : "",
+			     mach_remarks :"" ,
+			     machineSizeList: [],
+			     machineDrivingList : []			     
+			 };
+			 
+			 $scope.selectedCategory = {};
+	
+			 
+			 //richiesta dei tipi di potenza disponibili
+			 $scope.availSizeType = MachSizeTypeFactory.query({lang:'it'},function(){
+				 console.log("checking available sizetypes");
+				 console.log($scope.availSizeType);
+			 });
+			 $scope.availCategories = MachineCategoriesFactory.query({lang:curr_lang}, function(){		
+				 console.log("checking categories");
+				 console.log($scope.availCategories);
+			 });
+			 
+			 
+			 $scope.availDriveType = MachDriveTypeFactory.query({lang:'it'}, function(){
+				 console.log("checking available driving type");
+				 console.log($scope.availDriveType);
+			 });
+	
+	
+}]);

@@ -17,22 +17,6 @@
 
 var services = angular.module('ngdemo.services', ['ngResource']);
 
-services.factory('UsersFactory', function ($resource) {
-	 return $resource('http://localhost/aefis/rest/users', {}, {
-        query: { method: 'GET', isArray: true },
-        create: { method: 'POST' }
-    });
-
-});
-
-services.factory('UserFactory', function ($resource) {
-    return $resource('/ngdemo/web/users/:id', {}, {
-        show: { method: 'GET' },
-        update: { method: 'PUT', params: {id: '@id'} },
-        delete: { method: 'DELETE', params: {id: '@id'} }
-    });
-});
-
 
 /*
  * service.factory per la visualizzazione della lista
@@ -80,6 +64,16 @@ services.factory('MachDriveTypeFactory', function($resource){
  */
 services.factory('MachSizeTypeFactory', function($resource){
 	return $resource('http://localhost/aefis/rest/data/machinessizes2',{},{
+		query:{method:'GET', params:{lang:'@lang'}, isArray: true }
+	});
+});
+
+/**
+ *service factory per ottenere le categorie disponibili
+ *
+ */
+services.factory('MachineCategoriesFactory', function($resource){
+	return $resource('http://localhost/aefis/rest/data/categories',{},{
 		query:{method:'GET', params:{lang:'@lang'}, isArray: true }
 	});
 });
