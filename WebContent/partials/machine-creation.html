@@ -39,10 +39,10 @@
 	
 	             <div class="controls">
 	                 <select ng-options="categ.desc for categ in availCategories" 
-			          ng-model="selectedCategory" >
-			          <option value="">{{selectedCategory.desc}}</option>
+			          ng-model="new_machine.machineCategory" ng-change="getTypologies(new_machine.machineCategory.id)">
+			          <option value="">{{new_machine.machineCategory.desc}}</option>
 			        </select>
-	            	</div>
+	   
 	             </div>
 	         
 	        </div>

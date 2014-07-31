@@ -133,9 +133,9 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 
 
 
-app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location',
+app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location','MachTypoFactory',
                                          'MachDriveTypeFactory','MachSizeTypeFactory',"MachineCategoriesFactory",
-                                         function($scope, $routeParams, $location,  MachDriveTypeFactory,
+                                         function($scope, $routeParams, $location, MachTypoFactory, MachDriveTypeFactory,
                                         		MachSizeTypeFactory, MachineCategoriesFactory){
 			 // la lingua va impostata in maniera dinamica 
 			 //FIXME
@@ -145,14 +145,14 @@ app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location',
 			     mach_nick_name :"",
 			     mach_brand : "",
 			     mach_model : "",
-			     machineCategory : "",
-			     machineTypology : "",
+			     machineCategory : {},
+			     machineTypology : {},
 			     mach_plate : "",
 			     mach_manufact_registr :"",
 			     mach_vin : "",
 			     mach_remarks :"" ,
 			     machineSizeList: [],
-			     machineDrivingList : []			     
+			     machineDrivingList : [{code:0, acronym:'', descr:''}]			     
 			 };
 			 
 			 $scope.selectedCategory = {};
@@ -173,6 +173,41 @@ app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location',
 				 console.log("checking available driving type");
 				 console.log($scope.availDriveType);
 			 });
+			 
+			 
+			 $scope.getTypologies = function(machId){
+				 if(machId === undefined){
+					 console.log("machId undefined>>> "+ machId );
+					 return;
+				 }
+				 $scope.availTypologies = MachTypoFactory.query({category: machId},
+	                   		function(){
+	        		 console.log("checking available typologies");
+	        		 console.log($scope.availTypologies);
+	        		 
+	        	 });
+				 
+			 };
+			 
+			  $scope.deleteSizeItem= function(index){
+			    	console.log("index to delete:" + index);
+			    
+			    	$scope.new_machine.machineSizeList.splice(index,1);
+			    	
+			    	console.log('this is the array after spicing on pos');
+			    	console.log($scope.new_machine.machineSizeList);
+			    	console.log($scope.new_machine.machineSizeList.length);
+			    		
+			    };
+			    
+			    
+			    
+			    $scope.addSizeItem = function(){
+			        console.log("adding  a new size");
+				    console.log($scope.new_machine.machineSizeList);
+			    	$scope.new_machine.machineSizeList.push({'machineSizeType':{'code':'', 'descr': '', 'um': ''}, 'amount': 0});
+		
+			    };
 	
 	
 }]);
