@@ -76,12 +76,15 @@
 	                <input type="text" id="inputPlate" ng-model="machines[0].mach_plate"/>
 	            </div>
 	        </div>
-	      
+	     
 	          <div class="control-group">
-	            <label class="control-label" for="inputManufact">Manufact. Reg:</label>
+	            <label class="control-label" >Combination Type</label>
 	
 	            <div class="controls">
-	                <input type="text" id="inputManufact" ng-model="machines[0].mach_manufact_registr"/>
+	               <select ng-options="comb.desc for comb in machCombTypes " ng-model="machines[0].machCombType">
+	               <option value="">{{machines[0].machCombType.desc}}</option>
+	               </select>
+	                
 	            </div>
 	        </div>
 	       
@@ -97,7 +100,7 @@
 	            <label class="control-label" for="inputRemarks">Remarks:</label>
 	
 	            <div class="controls">
-	                <input type="textarea" id="inputRemarks" ng-model="machines[0].mach_remarks"/>
+	                <input type="text" id="inputRemarks" ng-model="machines[0].mach_remarks"/>
 	            </div>
 	        </div>
 	       
@@ -143,6 +146,7 @@
 			              </select>
 	            	    </div>
 			          </td> 
+			           
 			           
 			          <td>
 			            <input type="text" id="size_amount" ng-model="size.amount"/>

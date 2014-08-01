@@ -56,8 +56,9 @@ app.controller('MachinesListCtrl',['$scope', 'MachinesFactory',  '$location',
  * controller per la vista di dettaglio 
  * */
 app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory', '$location','MachTypoFactory',
-                                     'MachDriveTypeFactory','MachSizeTypeFactory',
-    function ($scope, $routeParams, MachineFactory, $location, MachTypoFactory, MachDriveTypeFactory,MachSizeTypeFactory){
+                                     'MachDriveTypeFactory','MachSizeTypeFactory','MachCombTypeService',
+    function ($scope, $routeParams, MachineFactory, $location, MachTypoFactory, MachDriveTypeFactory,
+    		  MachSizeTypeFactory,MachCombTypeService){
 		
 	    // callback for ng-click 'updateMachine':
 	    $scope.updateMachine = function (machineId, schema) {
@@ -102,7 +103,9 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 	    };
 	    
 	    
-	    var params = $location.search();
+		$scope.machCombTypes = MachCombTypeService.machCombTypes;	
+	    
+		var params = $location.search();
 	    
         $scope.machines = MachineFactory.query({id: params.id, schema:params.schema, lang:params.lang}, 
           function(){
@@ -135,9 +138,9 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 
 app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location','MachTypoFactory',
                                          'MachDriveTypeFactory','MachSizeTypeFactory',"MachineCategoriesFactory",
-                                         "MachineFactory",
+                                         "MachineFactory","MachCombTypeService",
                                          function($scope, $routeParams, $location, MachTypoFactory, MachDriveTypeFactory,
-                                        		MachSizeTypeFactory, MachineCategoriesFactory, MachineFactory){
+                                        		MachSizeTypeFactory, MachineCategoriesFactory, MachineFactory, MachCombTypeService){
 			 // la lingua va impostata in maniera dinamica 
 			 //FIXME
 			 var curr_lang ='it';	
@@ -153,11 +156,13 @@ app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location','
 			     mach_vin : "",
 			     mach_remarks :"" ,
 			     machineSizeList: [],
-			     machineDrivingList : [{code:0, acronym:'', descr:''}]			     
+			     machineDrivingList : [{code:0, acronym:'', descr:''}],
+			     machCombType : {}
 			 };
 			 
 			 $scope.selectedCategory = {};
-	
+			 
+			 $scope.machCombTypes = MachCombTypeService.machCombTypes;	
 			 
 			 //richiesta dei tipi di potenza disponibili
 			 $scope.availSizeType = MachSizeTypeFactory.query({lang:'it'},function(){
@@ -226,3 +231,5 @@ app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location','
 	
 	
 }]);
+
+

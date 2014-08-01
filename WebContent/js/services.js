@@ -77,3 +77,18 @@ services.factory('MachineCategoriesFactory', function($resource){
 		query:{method:'GET', params:{lang:'@lang'}, isArray: true }
 	});
 });
+
+
+/*
+ * service factory per iniettare nel controller la lista
+ * delle combination type, dovrebbe prelevare i dati da un servizio
+ * */
+services.factory('MachCombTypeService', function(){
+	console.log("about to use MachCombTypeService");
+	return {machCombTypes : [
+	       {code:'TR',desc:'trainato'},
+	       {code:'SP',desc:'semovente'},
+	       {code:'SM', desc: 'semiportato'},
+	       {code:'TM', desc: 'portato'}]};
+	       
+});
