@@ -1,7 +1,7 @@
 <div class="container">
   
 
-    <form novalidate="novalidate" class="form-horizontal">
+    <form novalidate="novalidate" class="form-horizontal css-form" name="create_form">
 	<panel class="panel panel-default">
 	    <!-- Heading del pannello -->
 	     <div class="panel-heading">
@@ -22,7 +22,8 @@
 	            <label class="control-label" for="inputName">Name:</label>
 	
 	            <div class="controls">
-	                <input type="text" id="inputName" ng-model="new_machine.mach_nick_name"/>
+	                <input name="nick_name" type="text" id="inputName" ng-model="new_machine.mach_nick_name" required/>
+	                <span class="error" ng-show="create_form.nick_name.$error.required">*Required</span>
 	            </div>
 	        </div>
 	      
@@ -38,13 +39,12 @@
 	            <label class="control-label" for="inputCategory">Category:</label>
 	
 	             <div class="controls">
-	                 <select ng-options="categ.desc for categ in availCategories" 
+	                 <select name="machineCategory" ng-options="categ.desc for categ in availCategories" 
 			          ng-model="new_machine.machineCategory" ng-change="getTypologies(new_machine.machineCategory.id)">
 			          <option value="">{{new_machine.machineCategory.desc}}</option>
 			        </select>
-	   
 	             </div>
-	         
+	           
 	        </div>
 	     
 	        <div class="control-group">
@@ -69,7 +69,11 @@
 	            <label class="control-label" for="inputManufact">Manufact. Reg:</label>
 	
 	            <div class="controls">
-	                <input type="text" id="inputManufact" ng-model="new_machine.mach_manufact_registr"/>
+	                <input name="manufact_reg" type="number" id="inputManufact" 
+	                 min="1960"   max="2040"
+	                 ng-model="new_machine.mach_manufact_registr" required/>
+	                <span class="error" ng-show="create_form.manufact_reg.$error.required">* Required</span>
+	                <span class="error" ng-show="create_form.manufact_reg.$error.number">* Not a valid number</span>
 	            </div>
 	        </div>
 	        
@@ -153,7 +157,7 @@
 			          </td> 
 			           
 			          <td>
-			            <input type="text" id="size_amount" ng-model="size.amount"/>
+			            <input type="number" id="size_amount" ng-model="size.amount"/>
 			          </td>
 			          
 			          <td>
@@ -192,7 +196,7 @@
 				            </select>
 			            </div>
 		            </td>
-		             <!-- <td><a ng-click="deleteDriveItem(drive.code)" class="btn btn-small">remove</a></td> -->
+		            
 		        </tr>
 	        </table>
 	        
@@ -200,8 +204,11 @@
 		
 		 <div class="control-group">
             <div class="controls">
+       
                   <a ng-click="cancel()" class="btn btn-small">cancel</a>
-                <a ng-click="createMachine()" class="btn btn-small btn-primary">create</a>
+                 <span ng-show="validateData()">
+                <a ng-click="createMachine()" class="btn btn-small btn-primary" >create</a>
+               </span> 
             </div>
         </div>
 		

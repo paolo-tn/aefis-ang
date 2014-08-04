@@ -28,3 +28,10 @@
   content: "";
   padding: 0;
 }
+ .css-form input.ng-invalid.ng-dirty{
+   background-color: #FA787E;	
+}
+.error {
+	color:#FF0000;
+}
+

@@ -24,7 +24,7 @@ app.controller('MachinesListCtrl',['$scope', 'MachinesFactory',  '$location',
 	//TODO: lang e azienda devono essere settate dall'utente
 	$scope.lang = 'it';
 	$scope.schema = 'azienda_xx';
-	
+
 	 $scope.machines = MachinesFactory.query({lang: $scope.lang, schema: $scope.schema}, function(){
 		 //callback per la visualizzazione immediata
      });
@@ -46,8 +46,6 @@ app.controller('MachinesListCtrl',['$scope', 'MachinesFactory',  '$location',
         	
          });
      };
-
-
 	 
 }]);
 
@@ -144,7 +142,7 @@ app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location','
 			 // la lingua va impostata in maniera dinamica 
 			 //FIXME
 			 var curr_lang ='it';	
-		
+			 
 			 $scope.new_machine = {
 			     mach_nick_name :"",
 			     mach_brand : "",
@@ -159,6 +157,15 @@ app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location','
 			     machineDrivingList : [{code:0, acronym:'', descr:''}],
 			     machCombType : {}
 			 };
+		
+
+		     $scope.validateData = function() {
+		    	 var result = false;
+		    	 console.log('validating machine');
+		         result = $scope.new_machine.machineCategory.desc!= undefined;
+		       
+		         return result;
+		     };
 			 
 			 $scope.selectedCategory = {};
 			 
@@ -207,7 +214,6 @@ app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location','
 			    };
 			    
 			    
-			    
 			    $scope.addSizeItem = function(){
 			        console.log("adding  a new size");
 				    console.log($scope.new_machine.machineSizeList);
@@ -226,9 +232,6 @@ app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location','
 			    	MachineFactory.save({'schema': "azienda_xx"}, $scope.new_machine );
 			        $location.path('/machines-list');
 			    };
-			    
-			    
-	
 	
 }]);
 
