@@ -192,9 +192,14 @@
 				            </select>
 			            </div>
 		            </td>
-		             <!-- <td><a ng-click="deleteDriveItem(drive.code)" class="btn btn-small">remove</a></td> -->
+		             
 		        </tr>
 	        </table>
+	        <div class="control-group">
+                   <div class="controls">
+                       <a ng-show="checkNoDriveItem()" ng-click="addDriveItem()" class="btn btn-small">AddItem</a>
+                   </div>
+               </div>
 	        
 		</div>
 		

@@ -78,7 +78,6 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 	    };
 	    
 	    
-	    
 	    $scope.deleteSizeItem= function(index){
 	    	console.log("index to delete:" + index);
 	    
@@ -90,10 +89,8 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 	    		
 	    };
 	    
-	    
-	    
 	    $scope.addSizeItem = function(){
-	        console.log("adding  a new size");
+	      console.log("adding  a new size");
 		    console.log($scope.machines[0].machineSizeList);
 	    	$scope.machines[0].machineSizeList.push({'machineSizeType':{'code':'', 'descr': '', 'um': ''}, 'amount': 0});
 	    	console.log("this is the array after adding a new size"); 
@@ -101,11 +98,11 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
 	    };
 	    
 	    
-		$scope.machCombTypes = MachCombTypeService.machCombTypes;	
+		  $scope.machCombTypes = MachCombTypeService.machCombTypes;	
 	    
-		var params = $location.search();
+		  var params = $location.search();
 	    
-        $scope.machines = MachineFactory.query({id: params.id, schema:params.schema, lang:params.lang}, 
+      $scope.machines = MachineFactory.query({id: params.id, schema:params.schema, lang:params.lang}, 
           function(){
         	 console.log("scope.machines");
         	 console.log($scope.machines[0]);
@@ -129,7 +126,15 @@ app.controller('MachineDetailCtrl', ['$scope', '$routeParams', 'MachineFactory',
         		 console.log("checking available sizetypes");
         		 console.log($scope.availSizeType);
         	 }); 
-        });    
+        });  
+      
+      $scope.checkNoDriveItem = function(){
+      	return $scope.machines[0].machineDrivingList.length ==  0;
+      };
+      
+      $scope.addDriveItem = function(){
+      	$scope.machines[0].machineDrivingList.push({code:0, acronym:'', descr:''});
+      };
 }]);
 
 
