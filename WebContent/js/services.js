@@ -98,32 +98,39 @@ services.factory('MachCombTypeService', function(){
  * disponibili nell'azienda.  ottiene i dati dalla vista
  * v_farm_dlogger
  */
-services.factory('FarmMachinesService', function(){
-	return {
-		avail_farmMachines : [
-		{
-		  machId: 461,
-		  name : 'Test Inferenza'
-	    },
-	    {
-	  	  machId: 664,
-		  name : 'Test atom 1'	    	
-	    }
-			]
-	};
+services.factory('FarmMachinesService', function($resource){
+//	return {
+//		avail_farmMachines : [
+//		{
+//		  machId: 461,
+//		  name : 'Test Inferenza'
+//	    },
+//	    {
+//	  	  machId: 664,
+//		  name : 'Test atom 1'	    	
+//	    }
+//			]
+//	};
+	return $resource('http://localhost/aefis/rest/data/farmmachines',{},{
+		query:{method:'GET', params:{schema:'@schema'}, isArray: true }
+	});
+	
 });
 
 /*
  * service factory per iniettare nel controlle la lista dei data logger
  * disponibili
  * */
-services.factory('AvailDataLoggersService', function(){	
-	return{ avail_datalog :[
-	   {
-		   code : '358278002119',
-		   tel  : '3351555675'
-	   }                        
-	]};
+services.factory('AvailDataLoggersService', function($resource){	
+//	return{ avail_datalog :[
+//	   {
+//		   code : '358278002119',
+//		   tel  : '3351555675'
+//	   }                        
+//	]};
+	return $resource('http://localhost/aefis/rest/data/dataloggers',{},{
+		query:{method:'GET', params:{schema:'@schema'}, isArray: true }
+	});
 });
 
 
@@ -132,23 +139,28 @@ services.factory('AvailDataLoggersService', function(){
  * service factory per visualizzare le associazione in uso
  * machine data logger
  */
-services.factory('MachDataLoggersService', function(){
-	return{
-		mach_dataloggers :[
-		  {
-			  machine : {machId:302, name:'test'},
-			  dataLogger :{code:'358278002119',  tel: 'xxx-xxxxxxxx'},
-			  activ : '2014-04-30',
-			  deact :''			  
-		  },
-		  {
-			  machine : {machId:672, name:'test2'},
-			  dataLogger :{code:'358278001739', tel:'xxx-xxxxxxxx'},
-			  activ : '2014-07-10',
-			  deact :''
-		  }
-		]
-	};
+services.factory('MachDataLoggersService', function($resource){
+//	return{
+//		mach_dataloggers :[
+//		  {
+//			  machine : {machId:302, name:'test'},
+//			  dataLogger :{code:'358278002119',  tel: 'xxx-xxxxxxxx'},
+//			  activ : '2014-04-30',
+//			  deact :''			  
+//		  },
+//		  {
+//			  machine : {machId:672, name:'test2'},
+//			  dataLogger :{code:'358278001739', tel:'xxx-xxxxxxxx'},
+//			  activ : '2014-07-10',
+//			  deact :''
+//		  }
+//		]
+//	};
+	
+	return $resource('http://localhost/aefis/rest/data/farmmachines/dataloggers',{},{
+	    query:{method:'GET', params:{schema:'@schema'}, isArray: true },
+	    save : {method:'POST', params:{schema:'@schema'}},
+	});
 });
 
 

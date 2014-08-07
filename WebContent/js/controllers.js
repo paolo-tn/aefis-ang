@@ -246,8 +246,8 @@ app.controller('MachineDataLogCtrl', ['$scope','$location', 'AvailDataLoggersSer
 	$scope.lang='it';
 	$scope.schema='azienda_xx';
 	
-	$scope.avail_dloggers = AvailDataLoggersService.avail_datalog;
-	$scope.mach_dataloggers =MachDataLoggersService.mach_dataloggers;
+	$scope.avail_dloggers = AvailDataLoggersService.query({schema:$scope.schema});
+	$scope.mach_dataloggers = MachDataLoggersService.query({schema:$scope.schema});
 	$scope.new_mach_datalogger = [];
 	
 	$scope.new_item = {
@@ -269,21 +269,21 @@ app.controller('MachineDataLogCtrl', ['$scope','$location', 'AvailDataLoggersSer
 	
 		$scope.new_mach_datalogger = [];
 	};  
-	$scope.save = function(){
-		console.log("post the new association");
-	};
+
 	
 	$scope.newItemExists= function(){
 	 return $scope.new_mach_datalogger.length > 0;	
 	};
 	
-	 $scope.avail_machines =FarmMachinesService.avail_farmMachines;
+	 $scope.avail_machines =FarmMachinesService.query({schema:$scope.schema});
 	 
 	 $scope.save =function(){
 		console.log('saving') ;
 		
-		$scope.mach_dataloggers.push($scope.new_mach_datalogger.pop());
+		//$scope.mach_dataloggers.push($scope.new_mach_datalogger.pop());
 		$scope.new_mach_datalogger = [];
+		
+		MachDataLoggersService.save({schema: $scope.schema}, $scope.new_item );
 		$scope.new_item = {
 				machine:{},
 				dataLogger: {},
