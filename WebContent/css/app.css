@@ -34,4 +34,7 @@
 .error {
 	color:#FF0000;
 }
+.custom-control{
+	margin-left:0px !important;
+}
 

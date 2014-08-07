@@ -92,3 +92,66 @@ services.factory('MachCombTypeService', function(){
 	       {code:'TM', desc: 'portato'}]};
 	       
 });
+
+/*
+ * service factory per ottenere l'elenco delle macchine
+ * disponibili nell'azienda.  ottiene i dati dalla vista
+ * v_farm_dlogger
+ */
+services.factory('FarmMachinesService', function(){
+	return {
+		avail_farmMachines : [
+		{
+		  machId: 461,
+		  name : 'Test Inferenza'
+	    },
+	    {
+	  	  machId: 664,
+		  name : 'Test atom 1'	    	
+	    }
+			]
+	};
+});
+
+/*
+ * service factory per iniettare nel controlle la lista dei data logger
+ * disponibili
+ * */
+services.factory('AvailDataLoggersService', function(){	
+	return{ avail_datalog :[
+	   {
+		   code : '358278002119',
+		   tel  : '3351555675'
+	   }                        
+	]};
+});
+
+
+
+/*
+ * service factory per visualizzare le associazione in uso
+ * machine data logger
+ */
+services.factory('MachDataLoggersService', function(){
+	return{
+		mach_dataloggers :[
+		  {
+			  machine : {machId:302, name:'test'},
+			  dataLogger :{code:'358278002119',  tel: 'xxx-xxxxxxxx'},
+			  activ : '2014-04-30',
+			  deact :''			  
+		  },
+		  {
+			  machine : {machId:672, name:'test2'},
+			  dataLogger :{code:'358278001739', tel:'xxx-xxxxxxxx'},
+			  activ : '2014-07-10',
+			  deact :''
+		  }
+		]
+	};
+});
+
+
+
+
+

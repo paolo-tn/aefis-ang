@@ -7,5 +7,7 @@ angular.module('ngdemo', ['ngdemo.filters', 'ngdemo.services', 'ngdemo.directive
         $routeProvider.when('/machine-detail/', {templateUrl: 'partials/machine-detail.html', controller: 'MachineDetailCtrl'});
         $routeProvider.when('/machine-creation', {templateUrl: 'partials/machine-creation.html', controller: 'MachineCreationCtrl'});
         $routeProvider.when('/machines-list', {templateUrl: 'partials/machines-list.html', controller: 'MachinesListCtrl'});
+        $routeProvider.when('/machines-dloggers',{templateUrl: 'partials/machines-dloggers.html', controller : 'MachineDataLogCtrl'});
         $routeProvider.otherwise({redirectTo: '/machines-list'});
+        
     }]);

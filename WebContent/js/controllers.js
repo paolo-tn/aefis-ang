@@ -240,4 +240,58 @@ app.controller('MachineCreationCtrl', [ '$scope', '$routeParams',  '$location','
 	
 }]);
 
+app.controller('MachineDataLogCtrl', ['$scope','$location', 'AvailDataLoggersService','MachDataLoggersService', 'FarmMachinesService',
+                                      function($scope, $location, AvailDataLoggersService, MachDataLoggersService, FarmMachinesService){
+	
+	$scope.lang='it';
+	$scope.schema='azienda_xx';
+	
+	$scope.avail_dloggers = AvailDataLoggersService.avail_datalog;
+	$scope.mach_dataloggers =MachDataLoggersService.mach_dataloggers;
+	$scope.new_mach_datalogger = [];
+	
+	$scope.new_item = {
+			machine:{},
+			dataLogger: {},
+			activ: '',
+			deact: ''	
+	};
+	
+
+	
+	$scope.addMachDataLogger = function(){
+		console.log("adding a new machdatalogger");
+		$scope.new_mach_datalogger.push($scope.new_item);
+	};
+	$scope.cancel = function(){
+		$location.path('/machines-dloggers');
+
+	
+		$scope.new_mach_datalogger = [];
+	};  
+	$scope.save = function(){
+		console.log("post the new association");
+	};
+	
+	$scope.newItemExists= function(){
+	 return $scope.new_mach_datalogger.length > 0;	
+	};
+	
+	 $scope.avail_machines =FarmMachinesService.avail_farmMachines;
+	 
+	 $scope.save =function(){
+		console.log('saving') ;
+		
+		$scope.mach_dataloggers.push($scope.new_mach_datalogger.pop());
+		$scope.new_mach_datalogger = [];
+		$scope.new_item = {
+				machine:{},
+				dataLogger: {},
+				activ: '',
+				deact: ''	
+		};
+	 };
+	
+}]);
+
 

@@ -1,0 +1,114 @@
+<div class="span6">
+
+   <form novalidate="novalidate" class="form-horizontal css-form" name="machdlogger_form">
+	<panel class="panel panel-default">
+	     <div class="panel-heading">
+		  <h3 class="panel-title">Existing association</h3>
+		</div>
+    <table class="table table-striped table-condensed">
+     
+        <tr>
+            <th style="min-width: 80px;">machine</th>
+             <th style="min-width: 80px;">datalogger</th>
+            <th style="min-width: 80px;">telephone number</th>
+            <th style="min-width: 80px;">activation date</th>
+            <th style="min-width: 80px;">deactivation date</th>
+     
+        </tr>
+        
+      
+        <tr ng-repeat="mach_dlogger in mach_dataloggers">        
+            <td>{{mach_dlogger.machine.name}}</td>
+            <td>{{mach_dlogger.dataLogger.code}}</td>
+            <td>{{mach_dlogger.dataLogger.tel}}</td>
+  			<td>{{mach_dlogger.act}}</td>
+  			<td>{{mach_dlogger.deact}}</td>
+        </tr>
+    </table>
+    </panel>
+     
+     <br/>
+     <div class="panel-body">
+        <div class="panel-heading">
+		  <h3 class="panel-title">New association</h3>
+		</div>
+		
+	
+		<table>	  
+		<tr>
+            <th style="min-width: 80px;">machine</th>
+             <th style="min-width: 80px;">datalogger</th>
+             
+            <th style="min-width: 80px;">telephone number</th>
+            <th style="min-width: 80px;">activation date</th>
+            <th style="min-width: 80px;">deactivation date</th>
+     
+        </tr>
+           
+	     <tr ng-repeat="new_item in new_mach_datalogger">
+	        <td>
+	       
+<!--            		<label class="control-label" >Machine</label> -->
+           		<div class="controls custom-control">
+	        		<select ng-options="machine.name for machine in avail_machines" ng-model="new_item.machine">
+                      <option value="" type="text"/>
+                    </select>
+	        	</div>
+	         
+	        </td>
+	        
+	        
+	        <td>	        
+<!-- 	           <label class="control-label" >datalogger</label> -->
+	           <div class="controls">
+                   <select ng-options="dlog.code for dlog in avail_dloggers" ng-model="new_item.dataLogger">
+                      <option value="" type="text"/>
+                    </select>
+               </div>
+       
+	        </td>
+	        <td>
+	      
+<!--            		<label class="control-label">telephone number</label> -->
+           		<div class="controls">
+	        		<input type="tel" readonly ng-model="new_item.dataLogger.tel"/>
+	        	</div>
+	   
+	        </td>
+	        
+	        <td>
+	       
+<!--            		<label class="control-label" >Activation date</label> -->
+           		<div class="controls">
+	        		<input type="date"ng-model="new_item.activ"/>
+	        	</div>
+	       
+	        </td>
+	        
+	          <td>
+	     
+<!--            		<label class="control-label" >Deactivation date</label> -->
+           		<div class="controls">
+	        		<input type="date" ng-model="new_item.deact"/>
+	        	</div>
+	
+	        </td>
+	        </tr>
+	     </table>
+	     
+	  </div>
+      <br/>
+      <div style="margin-top:30px">
+            <div class="controls custom-control" ">
+            
+            <a ng-show="!newItemExists()" ng-click="addMachDataLogger()" class="btn btn-small">New</a>
+            <span  ng-show="newItemExists()">
+                <a ng-click="cancel()" class="btn btn-small">cancel</a>
+               <a ng-click="save()" class="btn btn-small">save</a>
+               </span>
+            </div>
+        </div>
+      </div>
+    </form>
+    
+</div>
