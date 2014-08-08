@@ -15,6 +15,34 @@
 
  */
 
+/**
+ * url per debug da commentare in produzione
+ */
+var 
+  urlMachines = 'http://localhost/aefis/rest/data/machines2',
+  urlMachinesTypo = 'http://localhost/aefis/rest/data/machinestypo2',
+  urlMachinesDriving = 'http://localhost/aefis/rest/data/machinesdriving2',
+  urlMachineSizes = 'http://localhost/aefis/rest/data/machinessizes2',
+  urlMachinesCategories = 'http://localhost/aefis/rest/data/categories',
+  urlFarmMachineService = 'http://localhost/aefis/rest/data/farmmachines',
+  urlDataLoggerService = 'http://localhost/aefis/rest/data/dataloggers',
+  urlMachinesDataLogService = 'http://localhost/aefis/rest/data/farmmachines/dataloggers';
+  
+
+
+/**
+ * url da usare in produzione commentare in debug
+
+var 
+  urlMachines = '/aefis/rest/data/machines2',
+  urlMachinesTypo = '/aefis/rest/data/machinestypo2',
+  urlMachinesDriving = '/aefis/rest/data/machinesdriving2',
+  urlMachineSizes = '/aefis/rest/data/machinessizes2',
+  urlMachinesCategories = '/aefis/rest/data/categories',
+  urlFarmMachineService = '/aefis/rest/data/farmmachines',
+  urlDataLoggerService = '/aefis/rest/data/dataloggers',
+  urlMachinesDataLogService = '/aefis/rest/data/farmmachines/dataloggers';
+   */
 var services = angular.module('ngdemo.services', ['ngResource']);
 
 
@@ -22,7 +50,7 @@ var services = angular.module('ngdemo.services', ['ngResource']);
  * service.factory per la visualizzazione della lista
  * */
 services.factory('MachinesFactory', function($resource){
-	return $resource('http://localhost/aefis/rest/data/machines2',{},
+	return $resource(urlMachines,{},
 	  { query: { method: 'GET', params: {schema:'@schema', lang:'@lang'}, isArray: true}});
 });
 
@@ -31,7 +59,7 @@ services.factory('MachinesFactory', function($resource){
  * e visualizzazione della singola macchina
  * */
 services.factory('MachineFactory', function($resource){
-	return $resource('http://localhost/aefis/rest/data/machines2', {},{
+	return $resource(urlMachines, {},{
 		query: { method: 'GET', params:{id: '@id', schema: '@schema', lang:'@lang'}, isArray: true },
 		update:{method:'PUT', params:{id:'@id', schema:'@schema'}},
 		save : {method:'POST', params:{schema:'@schema'}},
@@ -45,7 +73,7 @@ services.factory('MachineFactory', function($resource){
  * una determinata categoria
  */
 services.factory('MachTypoFactory', function($resource){
-	return $resource('http://localhost/aefis/rest/data/machinestypo2',{},{
+	return $resource(urlMachinesTypo,{},{
 		query:{method:'GET', params:{category:'@category'}, isArray: true }
 	});
 });
@@ -54,7 +82,7 @@ services.factory('MachTypoFactory', function($resource){
  * service factory per ottenere i tipi di azionamento disponibili
  */
 services.factory('MachDriveTypeFactory', function($resource){
-	return $resource('http://localhost/aefis/rest/data/machinesdriving2',{},{
+	return $resource(urlMachinesDriving,{},{
 		query:{method:'GET', params:{lang:'@lang'}, isArray: true }
 	});
 });
@@ -63,7 +91,7 @@ services.factory('MachDriveTypeFactory', function($resource){
  *service factory per ottenere i tipi di potenza disponibili
  */
 services.factory('MachSizeTypeFactory', function($resource){
-	return $resource('http://localhost/aefis/rest/data/machinessizes2',{},{
+	return $resource(urlMachineSizes,{},{
 		query:{method:'GET', params:{lang:'@lang'}, isArray: true }
 	});
 });
@@ -73,7 +101,7 @@ services.factory('MachSizeTypeFactory', function($resource){
  *
  */
 services.factory('MachineCategoriesFactory', function($resource){
-	return $resource('http://localhost/aefis/rest/data/categories',{},{
+	return $resource(urlMachinesCategories,{},{
 		query:{method:'GET', params:{lang:'@lang'}, isArray: true }
 	});
 });
@@ -100,7 +128,7 @@ services.factory('MachCombTypeService', function(){
  */
 services.factory('FarmMachinesService', function($resource){
 
-	return $resource('http://localhost/aefis/rest/data/farmmachines',{},{
+	return $resource(urlFarmMachineService,{},{
 		query:{method:'GET', params:{schema:'@schema'}, isArray: true }
 	});
 	
@@ -112,7 +140,7 @@ services.factory('FarmMachinesService', function($resource){
  * */
 services.factory('AvailDataLoggersService', function($resource){	
 
-	return $resource('http://localhost/aefis/rest/data/dataloggers',{},{
+	return $resource(urlDataLoggerService,{},{
 		query:{method:'GET', params:{schema:'@schema'}, isArray: true }
 	});
 });
@@ -124,7 +152,7 @@ services.factory('AvailDataLoggersService', function($resource){
  * machine data logger
  */
 services.factory('MachDataLoggersService', function($resource){
-	return $resource('http://localhost/aefis/rest/data/farmmachines/dataloggers',{},{
+	return $resource(urlMachinesDataLogService,{},{
 	    query:{method:'GET', params:{schema:'@schema'}, isArray: true },
 	    save : {method:'POST', params:{schema:'@schema'}},
 	    deactivate : {method:'PUT', params:{id:'@id', schema:'@schema'}}
