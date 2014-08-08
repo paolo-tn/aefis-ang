@@ -245,6 +245,7 @@ app.controller('MachineDataLogCtrl', ['$scope','$location', 'AvailDataLoggersSer
 	
 	$scope.lang='it';
 	$scope.schema='azienda_xx';
+
 	
 	$scope.avail_dloggers = AvailDataLoggersService.query({schema:$scope.schema});
 	$scope.mach_dataloggers = MachDataLoggersService.query({schema:$scope.schema});
@@ -254,15 +255,16 @@ app.controller('MachineDataLogCtrl', ['$scope','$location', 'AvailDataLoggersSer
 			machine:{},
 			dataLogger: {},
 			activ: '',
-			deact: ''	
+			deact: '',
+			id:''
 	};
 	
 
 	
-	$scope.addMachDataLogger = function(){
-		console.log("adding a new machdatalogger");
-		$scope.new_mach_datalogger.push($scope.new_item);
-	};
+//	$scope.addMachDataLogger = function(){
+//		console.log("adding a new machdatalogger");
+//		$scope.new_mach_datalogger.push($scope.new_item);
+//	};
 	$scope.cancel = function(){
 		$location.path('/machines-dloggers');
 
@@ -270,27 +272,37 @@ app.controller('MachineDataLogCtrl', ['$scope','$location', 'AvailDataLoggersSer
 		$scope.new_mach_datalogger = [];
 	};  
 
-	
-	$scope.newItemExists= function(){
-	 return $scope.new_mach_datalogger.length > 0;	
-	};
-	
 	 $scope.avail_machines =FarmMachinesService.query({schema:$scope.schema});
 	 
 	 $scope.save =function(){
-		console.log('saving') ;
-		
-		//$scope.mach_dataloggers.push($scope.new_mach_datalogger.pop());
 		$scope.new_mach_datalogger = [];
 		
-		MachDataLoggersService.save({schema: $scope.schema}, $scope.new_item );
+		MachDataLoggersService.save({schema: $scope.schema}, $scope.new_item);
+
 		$scope.new_item = {
 				machine:{},
 				dataLogger: {},
 				activ: '',
-				deact: ''	
+				deact: '',
+				id:''
 		};
 	 };
+	 
+	 $scope.deactivate = function(idx){
+		console.log('deactivativating ' + idx); 
+		console.log($scope.mach_dataloggers[idx].id);
+		MachDataLoggersService.deactivate({id:$scope.mach_dataloggers[idx].id, schema:$scope.schema},function(){
+        	console.log('deactivated');
+        });
+	 };
+	 
+	 
+	 $scope.isActive = function(idx){
+		 console.log( $scope.mach_dataloggers[idx].deact== null);
+		return  ( $scope.mach_dataloggers[idx].deact == null);
+	 };
+	 
+	 
 	
 }]);
 
